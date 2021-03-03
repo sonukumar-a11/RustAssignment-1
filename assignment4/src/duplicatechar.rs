@@ -1,30 +1,53 @@
-pub fn find_duplicate(str: &str) -> String{
-    let mut my_vec: Vec<char> = str.chars().collect();
-    let mut i = 0;
-    let mut result = String::new();
-    while i < str.len() {
-        let mut count = 1;
-        let mut j = i + 1;
-        while j < str.len() {
-            if my_vec[i] == my_vec[j] && my_vec[i] != ' ' {
-                count += 1;
-                my_vec[j] = '0';
+/// This function check the duplicate character in function.
+///
+/// #Arguments
+///
+/// iterable_data :- Take a Slice String as Required Argument and perform task to find duplicate in string
+///
+/// #Return
+///
+/// Return the string having duplicate value in present string.
+pub fn find_duplicate(iterable_data: &str) -> String {
+    let mut store_character_vector: Vec<char> = iterable_data.chars().collect();
+    let mut record_index = 0;
+    let mut stormers = String::new();
+    while record_index < iterable_data.len() {
+        let mut count_occupancy = 1;
+        let mut next_index = record_index + 1;
+        while next_index < iterable_data.len() {
+            if store_character_vector[record_index] == store_character_vector[next_index]
+                && store_character_vector[record_index] != ' '
+            {
+                count_occupancy += 1;
+                store_character_vector[next_index] = '0';
             }
-            j += 1;
+            next_index += 1;
         }
-        if count > 1 && my_vec[i] != '0' {
-            result.push(my_vec[i]);
+        if count_occupancy > 1 && store_character_vector[record_index] != '0' {
+            stormers.push(store_character_vector[record_index]);
         }
-        i += 1;
+        record_index += 1;
     }
-    return result
+    return stormers;
 }
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
-    fn check_func() {
+    fn check_duplicates_exist_0() {
+        assert_eq!(find_duplicate("Sonu Kumar"),"u");
+    }
+    #[test]
+    fn check_duplicates_exist_1() {
         assert_eq!(find_duplicate("Hello World"), "lo");
+    }
+    #[test]
+    fn check_duplicates_exist_2() {
+        assert_eq!(find_duplicate("Exist a Values"), "sa");
+    }
+    #[test]
+    fn check_duplicates_exist_3() {
+        assert_eq!(find_duplicate("Boat"), "");
     }
 }
