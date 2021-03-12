@@ -19,6 +19,16 @@ pub struct GeometricSeries {
 }
 
 impl Iterator for GeometricSeries {
+    /// next function used to solve GP Series
+    ///
+    /// #Arguments
+    ///
+    /// self - required number you want to generate
+    ///
+    /// #Return
+    ///
+    /// Returns the value of option<T> enum....
+
     fn next(&mut self) -> Option<i32> {
         let out = self.current_number;
         self.current_number *= self.ratio;
