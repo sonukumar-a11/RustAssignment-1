@@ -1,8 +1,8 @@
 #[cfg(test)]
 #[test]
 fn check_question() {
-    use crate::custom_iterable::{GeoProgression, Iterator};
-    let mut gp = GeoProgression {
+    use crate::custom_iterable::{GeometricSeries, Iterator};
+    let mut gp = GeometricSeries {
         first_number: 1,
         current_number: 1,
         ratio: 2,
@@ -12,7 +12,7 @@ fn check_question() {
         vec![1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
     );
 
-    let mut gp = GeoProgression {
+    let mut gp = GeometricSeries {
         first_number: 0,
         current_number: 0,
         ratio: 0,

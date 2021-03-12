@@ -12,13 +12,13 @@ pub trait Iterator {
     fn take(&mut self, size: i32) -> Vec<i32>;
 }
 
-pub struct GeoProgression {
+pub struct GeometricSeries {
     pub first_number: i32,
     pub current_number: i32,
     pub ratio: i32,
 }
 
-impl Iterator for GeoProgression {
+impl Iterator for GeometricSeries {
     fn next(&mut self) -> Option<i32> {
         let out = self.current_number;
         self.current_number *= self.ratio;
