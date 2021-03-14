@@ -44,7 +44,7 @@ pub fn _desideratum_output(iterator1: &str, iterator2: &str, iterator3: &str) ->
                 array.push(result_char.unwrap());
             }
         }
-        i += 1;
+        itration += 1;
         position += 1
     }
     let result: String = array.iter().collect();
