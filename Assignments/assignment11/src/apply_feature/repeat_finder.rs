@@ -28,7 +28,7 @@ pub fn first_repeated(iterable: Store) -> i32 {
 ///
 /// Return the i32 number containing first repeated number.
 fn consecutive(iterable: Store, previous_one: i32) -> i32 {
-    info!("finds number at {} previous_one", previous_one);
+    info!("finds number at {} previous_one");
     match iterable {
         Nil => -1,
 
