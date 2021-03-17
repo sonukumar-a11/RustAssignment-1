@@ -31,7 +31,7 @@ pub fn nth(position: i32, iterable: Store) -> i32 {
 ///
 /// Return the i32 number contains nth element
 pub fn recursion(position: i32, iterator: Store, counter: i32) -> i32 {
-    info!("finds number at {} counter");
+    info!("finds number at counter");
     match iterator {
         Nil => -1,
         Value(current, _) if counter == position => current,
