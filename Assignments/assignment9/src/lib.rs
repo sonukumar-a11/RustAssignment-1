@@ -1,4 +1,9 @@
 mod custom_iterable;
-mod minimum_value;
-mod sort_something;
+
 mod test;
+
+pub mod assosiate_function {
+    pub mod minimum_value;
+
+    pub mod sort_something;
+}
