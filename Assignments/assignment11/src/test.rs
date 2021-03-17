@@ -8,6 +8,7 @@ mod tests {
 
     #[test]
     fn first_repeated_check() {
+        env_logger::init();
         let list_val = Value(
             1,
             Box::new(Value(
