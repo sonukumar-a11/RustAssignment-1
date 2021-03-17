@@ -30,7 +30,7 @@ pub fn third_odd(iterable: Store) -> i32 {
 /// Return the i32 number contains the third odd number
 
 pub fn find_odd(iterable: Store, iterator: i32) -> i32 {
-    info!("finds number at {} odd_index", iterator);
+    info!("finds number at {} odd_index");
     match iterable {
         Nil => -1,
 
