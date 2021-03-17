@@ -1,21 +1,25 @@
-use std::collections::BTreeSet;
-/// _remove_same function return unique value
+/// return_unique which Remove continuously occurring duplicate
 ///
 /// #Arguments
 ///
-///iterable - take a iterable as vector in which  manipulation feasible
+///iterable - A iterable is Vector object which contains the list of numbers
 ///
 /// #Return
 ///
-/// Returns Vector value to give the unique vector
-pub fn _return_unique(iterable: &mut Vec<i32>) -> Vec<i32> {
-    let mut stare: BTreeSet<&i32> = BTreeSet::new();
+/// Returns Vector which maintain the Continuously unique element  
+pub fn compress(iterable: Vec<i32>) -> Vec<i32> {
+    let mut unique: Vec<i32> = Vec::new();
     for item in iterable {
-        stare.insert(item);
+        let top = unique.last();
+        match top {
+            Some(value) => {
+                if item != *value {
+                    unique.push(item);
+                }
+            }
+            None => unique.push(item),
+        }
     }
-    let mut array_val: Vec<i32> = Vec::new();
-    for value in stare.iter() {
-        array_val.push(**value);
-    }
-    array_val
+    log::info!("Remove continuously occurring duplicate");
+    unique
 }

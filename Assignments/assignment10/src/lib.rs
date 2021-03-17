@@ -1,6 +1,9 @@
-mod hash;
 mod test;
-mod concept_with_question2 {
+pub mod hash_part {
+    pub mod hash;
+}
+
+pub mod concept_with_question2 {
     pub mod add_duplicate;
     pub mod palindrome_check;
     pub mod remove_duplicate;

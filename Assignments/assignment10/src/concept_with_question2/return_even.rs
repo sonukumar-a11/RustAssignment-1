@@ -1,21 +1,18 @@
-/// _first_even function return the first even value present in the iterable
+/// first_even which find out the first even number
 ///
 /// #Arguments
 ///
-///iterable - take a iterable as vector in which  manipulation feasible
+///iterable - A iterable is Vector object which contains the list of numbers
 ///
 /// #Return
 ///
-/// Returns i32 as  the first even value present in the iterable
-pub fn _first_even(iterable: Vec<i32>) -> i32 {
+/// Returns { Integer } value as first even number
+pub fn first_even(iterable: Vec<i32>) -> i32 {
     let mut index = 0;
-    let mut _value = -1;
     loop {
         if iterable[index] & 1 == 0 {
-            _value = iterable[index];
-            break;
+            return iterable[index];
         }
         index += 1;
     }
-    _value
 }

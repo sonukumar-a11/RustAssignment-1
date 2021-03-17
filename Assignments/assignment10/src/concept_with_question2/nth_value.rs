@@ -1,38 +1,39 @@
-/// _Drop Structure used to store the field and bind to use as custom dataType
+use std::convert::TryInto;
+
+///Drop structure which used to encapsulate the data
 ///
-/// #Arguments
+/// #field
 ///
-///nth_value - Take a index as in usize
-///iterable - take a iterable to manipulation on iterable
+/// nth_value:-a nth_value is usize object consider as remove value
 ///
-/// #Return
-///
-/// Returns the bind into single unit
-pub struct _Drop {
+/// iterable:-A iterable is Vector object which contains the list of numbers
+pub struct Drop {
     pub nth_value: usize,
     pub iterable: Vec<i32>,
 }
-impl _Drop {
-    /// _drop_element function remove the Drop.index value from given iterable
+
+impl Drop {
+    /// duplicate_element which drop the nth element
     ///
     /// #Arguments
     ///
-    ///self:- take a structure data
+    ///iterable - A iterable is Vector object which contains the list of numbers
     ///
     /// #Return
     ///
-    /// Returns Vector to remove the Drop.index value from given iterable
-    pub fn _drop_element(&self) -> Vec<i32> {
-        let mut index: usize = 0;
-        let mut answer: Vec<i32> = Vec::new();
-        loop {
-            if index == self.nth_value - 1 {
-                answer.extend_from_slice(&self.iterable[..index]);
-                break;
+    /// Returns Vector after removing the element
+    pub fn drop_element(&mut self) -> Vec<i32> {
+        let mut iteration: usize = 0;
+        while iteration < self.iterable.len() {
+            if self.nth_value == self.iterable[iteration].try_into().unwrap() {
+                self.iterable.remove(iteration);
             }
-            index += 1
+
+            iteration += 1;
         }
-        answer.extend_from_slice(&self.iterable[index + 1..]);
-        answer
+
+        let array;
+        array = self.iterable.clone();
+        array
     }
 }

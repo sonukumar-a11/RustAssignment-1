@@ -1,32 +1,29 @@
-/// reverse_something  give the reverse of vector
+/// reverse_recursively which reverse the vector recursively
 ///
 /// #Arguments
 ///
-/// iterable - take a iterable as vector in which  manipulation feasible
-///
-/// #Return
-///
-/// change the given vector to reverse through recursion
-fn _reverse_something(iterable: &mut Vec<i32>, either_start: usize, either_end: usize) {
+///iterable - A iterable is Vector object which contains the list of numbers
+fn reverse_recursively(iterable: &mut Vec<i32>, either_start: usize, either_end: usize) {
     if either_start >= either_end {
         return;
     }
     iterable.swap(either_start, either_end);
-    _reverse_something(iterable, either_start + 1, either_end - 1);
+    reverse_recursively(iterable, either_start + 1, either_end - 1);
 }
-/// _check_reverse  give the reverse of vector
+
+/// reverse which reverse the vector of integer
 ///
 /// #Arguments
 ///
-/// iterable - take a iterable as vector in which  manipulation feasible
+///iterable - A iterable is Vector object which contains the list of numbers
 ///
 /// #Return
 ///
-/// return the  vector having store reverse of given vector
-pub fn _check_reverse(iterable: &mut Vec<i32>) -> Vec<i32> {
+/// return Vector maintaining  store reverse of vector
+pub fn reverse(iterable: &mut Vec<i32>) -> Vec<i32> {
     let eiter_start: usize = 0;
     let eiter_end: usize = iterable.len() - 1;
-    _reverse_something(iterable, eiter_start, eiter_end);
+    reverse_recursively(iterable, eiter_start, eiter_end);
     let clone_iterable = iterable.clone();
 
     log::info!("List : {:?}", clone_iterable);

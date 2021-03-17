@@ -1,13 +1,13 @@
-/// _duplicate_element function return the duplicate element with filling
+/// duplicate_element which add the duplicate element
 ///
 /// #Arguments
 ///
-///iterable - take a iterable as vector in which  manipulation feasible
+///iterable - A iterable is Vector object which contains the list of numbers
 ///
 /// #Return
 ///
-/// Returns Vector value to give the duplicate value
-pub fn _duplicate_element(iterable: &mut Vec<i32>) -> Vec<i32> {
+/// Returns Vector maintain  the duplicate of each element
+pub fn duplicate_element(iterable: &mut Vec<i32>) -> Vec<i32> {
     let size = iterable.len();
 
     for item in 0..size {
