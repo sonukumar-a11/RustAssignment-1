@@ -2,12 +2,12 @@
 mod tests {
     use futures::executor::block_on;
 
-    use crate::asynch::asynchronous::compute;
-    use crate::synchronously::equate;
+    use crate::asynch::asynchronous::check_table;
+    use crate::asynchronously::equate;
 
     #[test]
     fn tables_check_success() {
-        assert_eq!(block_on(compute()), ());
+        assert_eq!(block_on(check_table()), ());
     }
 
     #[test]

@@ -4,4 +4,4 @@ pub mod asynch {
     pub mod asynchronous;
 }
 
-pub mod synchronously;
+pub mod asynchronously;
