@@ -132,7 +132,7 @@ mod tests {
 
         assert_eq!(
             book_check_1.issue_book("The Divine Comedy".parse().unwrap()),
-            ()
+            Some(1)
         );
     }
 }

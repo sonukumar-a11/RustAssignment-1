@@ -144,8 +144,8 @@ impl BookCollection {
     ///
     /// #Return
     ///
-    /// Returns Result type object which issued book exist or not..........
-    pub fn issue_book(&mut self, book_name: String) {
+    /// Returns Option<T> type object which issued book exist or not..........
+    pub fn issue_book(&mut self, book_name: String) -> Option<i32> {
         let book_containing_index = self
             .book_title
             .iter()
@@ -157,6 +157,7 @@ impl BookCollection {
             self.accession_number.remove(book_containing_index);
             self.flag -= 1;
             info!("book issued SuccessFully");
+            Some(1)
         }
     }
 }
