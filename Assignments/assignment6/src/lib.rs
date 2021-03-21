@@ -1,3 +1,9 @@
-mod check_coordinates;
-mod check_ipaddress;
 mod test;
+
+pub mod coordinate_check {
+    pub mod check_coordinates;
+}
+
+pub mod ipcheck {
+    pub mod check_ipaddress;
+}
