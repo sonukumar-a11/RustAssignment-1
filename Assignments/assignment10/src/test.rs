@@ -12,6 +12,7 @@ mod tests {
 
     #[test]
     fn check_hash_sum() {
+        env_logger::init();
         use std::collections::HashMap;
         let mut ourmap = HashMap::new();
         ourmap.insert("sonu", 15);
@@ -19,7 +20,7 @@ mod tests {
         ourmap.insert("monu", 94);
         ourmap.insert("shubranu", 4);
         ourmap.insert("satyendra", 21);
-        assert_eq!(conditional_sum(ourmap, "nu"), 113);
+        assert_eq!(conditional_sum(ourmap, "nu"), Ok(113));
     }
 
     #[test]
@@ -30,30 +31,44 @@ mod tests {
         usermap.insert("djekfth", 14);
         usermap.insert("shubranu", 4);
         usermap.insert("satyendra", 21);
-        assert_eq!(conditional_sum(usermap, "ek"), 115);
+        assert_eq!(conditional_sum(usermap, "ek"), Ok(115));
     }
 
     #[test]
     fn palindrome_check() {
         let output = vec![1, 1];
-        assert_eq!(check_palindrome(output), true);
+        assert_eq!(check_palindrome(output), Ok(true));
     }
 
     #[test]
     fn palindrome_check_next() {
-        assert_eq!(check_palindrome(vec![1, 2]), false);
+        assert_eq!(check_palindrome(vec![1, 2]), Ok(false));
+    }
+
+    #[test]
+    fn palindrome_check_next_empty() {
+        assert_eq!(
+            check_palindrome(vec![]),
+            Err("Iterable is not valid".parse().unwrap())
+        );
     }
 
     #[test]
     fn check_reverse() {
-        let mut output = vec![1, 1];
-        assert_eq!(reverse(&mut output), [1, 1]);
+        assert_eq!(reverse(&mut vec![1, 1]), Ok(vec![1, 1]));
     }
 
     #[test]
     fn check_reverse_next() {
-        let mut output = vec![1, 3, 4];
-        assert_eq!(reverse(&mut output), [4, 3, 1]);
+        assert_eq!(reverse(&mut vec![1, 3, 4]), Ok(vec![4, 3, 1]));
+    }
+
+    #[test]
+    fn check_reverse_invalid() {
+        assert_eq!(
+            reverse(&mut vec![]),
+            Err("Iterable is not valid".parse().unwrap())
+        );
     }
 
     #[test]
@@ -62,7 +77,10 @@ mod tests {
             nth_value: 3,
             iterable: vec![1, 2, 3, 4, 5, 6, 7, 8, 9],
         };
-        assert_eq!(drop_iterable.drop_element(), [1, 2, 4, 5, 6, 7, 8, 9]);
+        assert_eq!(
+            drop_iterable.drop_element(),
+            Ok(vec![1, 2, 4, 5, 6, 7, 8, 9])
+        );
     }
 
     #[test]
@@ -71,7 +89,22 @@ mod tests {
             nth_value: 6,
             iterable: vec![1, 2, 3, 4, 5, 6, 7, 8, 9],
         };
-        assert_eq!(drop_iterable.drop_element(), [1, 2, 3, 4, 5, 7, 8, 9]);
+        assert_eq!(
+            drop_iterable.drop_element(),
+            Ok(vec![1, 2, 3, 4, 5, 7, 8, 9])
+        );
+    }
+
+    #[test]
+    fn check_drop_element_invalid() {
+        let mut drop_iterable: Drop = Drop {
+            nth_value: 6,
+            iterable: vec![],
+        };
+        assert_eq!(
+            drop_iterable.drop_element(),
+            Err("Iterable is not valid".to_string())
+        );
     }
 
     #[test]
@@ -89,24 +122,39 @@ mod tests {
     #[test]
     fn check_even() {
         let output = vec![1, 2];
-        assert_eq!(first_even(output), 2);
+        assert_eq!(first_even(output), Ok(2));
     }
 
     #[test]
     fn check_even_next() {
         let output = vec![1, 0];
-        assert_eq!(first_even(output), 0);
+        assert_eq!(first_even(output), Ok(0));
+    }
+
+    #[test]
+    fn check_even_invalid() {
+        let output = vec![];
+        assert_eq!(
+            first_even(output),
+            Err("Iterable is not valid".parse().unwrap())
+        );
     }
 
     #[test]
     fn check_duplicate_exist() {
         let output = vec![0, 0, 1, 1];
-        assert_eq!(compress(output), [0, 1]);
+        assert_eq!(compress(output), Ok(vec![0, 1]));
     }
 
     #[test]
     fn check_duplicate_exist_next() {
         let output = vec![0, 0, 1, 1, 2, 2, 3, 4, 4, 5];
-        assert_eq!(compress(output), [0, 1, 2, 3, 4, 5]);
+        assert_eq!(compress(output), Ok(vec![0, 1, 2, 3, 4, 5]));
+    }
+
+    #[test]
+    fn check_duplicate_exist_invalid() {
+        let output = vec![];
+        assert_eq!(compress(output), Err("Iterable is not valid".to_string()));
     }
 }

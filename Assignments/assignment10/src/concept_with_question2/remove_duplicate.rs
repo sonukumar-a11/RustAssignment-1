@@ -6,8 +6,11 @@
 ///
 /// #Return
 ///
-/// Returns Vector which maintain the Continuously unique element  
-pub fn compress(iterable: Vec<i32>) -> Vec<i32> {
+/// Returns Result<Vec<T>,String> which maintain the Continuously unique element and Handle error as well
+pub fn compress(iterable: Vec<i32>) -> Result<Vec<i32>, String> {
+    if iterable.is_empty() {
+        return Err("Iterable is not valid".to_string());
+    }
     let mut unique: Vec<i32> = Vec::new();
     for item in iterable {
         let top = unique.last();
@@ -21,5 +24,5 @@ pub fn compress(iterable: Vec<i32>) -> Vec<i32> {
         }
     }
     log::info!("Remove continuously occurring duplicate");
-    unique
+    Ok(unique)
 }

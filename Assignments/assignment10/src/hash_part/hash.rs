@@ -13,8 +13,11 @@ use regex::Regex;
 ///
 /// #Return
 ///
-/// Returns { Integer } having the sum of ages for which the name contains the string
-pub fn conditional_sum(key_value: HashMap<&str, i32>, str: &str) -> i32 {
+/// Returns Result<i32,String>  having the sum of ages for str and handle the error as well.....
+pub fn conditional_sum(key_value: HashMap<&str, i32>, str: &str) -> Result<i32, String> {
+    if key_value.is_empty() {
+        return Err("Given HashMap have no Key: Value".parse().unwrap());
+    }
     let mut add_value = 0;
     let regex_val = Regex::new(&*(r"".to_string() + str)).unwrap();
     for item in key_value {
@@ -23,5 +26,5 @@ pub fn conditional_sum(key_value: HashMap<&str, i32>, str: &str) -> i32 {
         }
     }
     log::info!("the sum of ages for which the name contains the string");
-    add_value
+    Ok(add_value)
 }

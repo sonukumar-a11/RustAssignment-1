@@ -21,8 +21,11 @@ impl Drop {
     ///
     /// #Return
     ///
-    /// Returns Vector after removing the element
-    pub fn drop_element(&mut self) -> Vec<i32> {
+    /// Returns Result<T,String> T consider as a give a valid result and handle the error as well........
+    pub fn drop_element(&mut self) -> Result<Vec<i32>, String> {
+        if self.iterable.is_empty() {
+            return Err("Iterable is not valid".to_string());
+        }
         let mut iteration: usize = 0;
         while iteration < self.iterable.len() {
             if self.nth_value == self.iterable[iteration].try_into().unwrap() {
@@ -34,6 +37,6 @@ impl Drop {
 
         let array;
         array = self.iterable.clone();
-        array
+        Ok(array)
     }
 }

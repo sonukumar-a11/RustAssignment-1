@@ -1,4 +1,4 @@
-/// first_even which find out the first even number
+/// first_even which is used to find out the first even number
 ///
 /// #Arguments
 ///
@@ -6,12 +6,15 @@
 ///
 /// #Return
 ///
-/// Returns { Integer } value as first even number
-pub fn first_even(iterable: Vec<i32>) -> i32 {
+/// Returns Result<i32,String>> value as first even number and handle the Error as well as ...........
+pub fn first_even(iterable: Vec<i32>) -> Result<i32, String> {
+    if iterable.is_empty() {
+        return Err("Iterable is not valid".to_string());
+    }
     let mut index = 0;
     loop {
         if iterable[index] & 1 == 0 {
-            return iterable[index];
+            return Ok(iterable[index]);
         }
         index += 1;
     }
