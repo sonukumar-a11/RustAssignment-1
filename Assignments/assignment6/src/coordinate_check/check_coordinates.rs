@@ -1,3 +1,5 @@
+use log::*;
+
 #[derive(PartialEq, Eq, Debug)]
 ///Coordinate enum which used to encapsulate the X_axis as Abscissa and Y_axis as Ordinate
 ///
@@ -78,6 +80,9 @@ pub fn check_coordinate(point: (i32, i32)) -> Result<Position, String> {
             Coordinate::Abscissa(point.0),
             Coordinate::Ordinate(point.1),
         )),
-        _ => panic!("Putting unwanted Coordinates"),
+        _ => {
+            error!("Wrong Ip");
+            panic!("Putting unwanted Coordinates")
+        }
     }
 }

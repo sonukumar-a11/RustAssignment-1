@@ -1,3 +1,5 @@
+use log::*;
+
 #[derive(PartialEq, Eq, Debug)]
 ///IpAddress enum which used to encapsulate the class of ipAddress
 ///
@@ -51,6 +53,9 @@ pub fn check_ip_address(ipconfig: (u128, u128, u128, u128)) -> Result<IpAddress,
             "{}.{}.{}.{}",
             ipconfig.0, ipconfig.1, ipconfig.2, ipconfig.3
         ))),
-        _ => Err("Unwanted Input".to_string()),
+        _ => {
+            error!("Wrong Ip Provided");
+            Err("Unwanted Input".to_string())
+        }
     }
 }
