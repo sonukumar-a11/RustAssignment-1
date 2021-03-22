@@ -1,4 +1,4 @@
-use log::info;
+use log::*;
 
 use crate::datastore::Store;
 use crate::datastore::Store::{Nil, Value};
@@ -11,10 +11,15 @@ use crate::datastore::Store::{Nil, Value};
 ///
 /// #Return
 ///
-/// Return the i32 number contains second repeated number.
+///Return the Result<T,E>  T consider number contains second repeated number and handle error as well...
 
-pub fn second_repeated(iterable: Store) -> i32 {
-    recursion(-1, iterable, 0)
+pub fn second_repeated(iterable: Store) -> Result<i32, String> {
+    if iterable == Nil {
+        error!("Empty Box Provided");
+        return Err("Please provide valid Input".to_string());
+    }
+    let result = recursion(-1, iterable, 0);
+    Ok(result)
 }
 
 /// recursion function use recursion to match list object and find second repeated number.

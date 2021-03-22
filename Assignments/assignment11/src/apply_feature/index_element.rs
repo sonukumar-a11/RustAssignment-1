@@ -1,4 +1,4 @@
-use log::info;
+use log::*;
 
 use crate::datastore::Store;
 use crate::datastore::Store::{Nil, Value};
@@ -13,9 +13,14 @@ use crate::datastore::Store::{Nil, Value};
 ///
 /// #Return
 ///
-/// Return the i32 number contains nth element
-pub fn nth(position: i32, iterable: Store) -> i32 {
-    recursion(position - 1, iterable, 0)
+/// Return the Result<T,E>  T consider number contains nth element an handle error as well as.....
+pub fn nth(position: i32, iterable: Store) -> Result<i32, String> {
+    if iterable == Nil {
+        error!("Empty Box Provided");
+        return Err("Please provide valid Input".to_string());
+    }
+    let result = recursion(position - 1, iterable, 0);
+    Ok(result)
 }
 
 /// nth function finds the nth element from the iterator.

@@ -22,9 +22,8 @@ mod tests {
                 )),
             )),
         );
-        assert_eq!(first_repeated(list_val), 21);
+        assert_eq!(first_repeated(list_val), Ok(21));
     }
-
     #[test]
     fn first_repeated_check_next_times() {
         let list_val = Value(
@@ -40,9 +39,8 @@ mod tests {
                 )),
             )),
         );
-        assert_eq!(first_repeated(list_val), -1);
+        assert_eq!(first_repeated(list_val), Ok(-1));
     }
-
     #[test]
     fn second_repeat_check() {
         let box_array = Value(
@@ -58,7 +56,7 @@ mod tests {
                 )),
             )),
         );
-        assert_eq!(second_repeated(box_array), 7);
+        assert_eq!(second_repeated(box_array), Ok(7));
     }
 
     #[test]
@@ -76,7 +74,7 @@ mod tests {
                 )),
             )),
         );
-        assert_eq!(second_repeated(box_array), -1);
+        assert_eq!(second_repeated(box_array), Ok(-1));
     }
 
     #[test]
@@ -94,7 +92,7 @@ mod tests {
                 )),
             )),
         );
-        assert_eq!(nth(4, test_list), 4);
+        assert_eq!(nth(4, test_list), Ok(4));
     }
 
     #[test]
@@ -112,7 +110,7 @@ mod tests {
                 )),
             )),
         );
-        assert_eq!(nth(7, test_list), -1);
+        assert_eq!(nth(7, test_list), Ok(-1));
     }
 
     #[test]
@@ -130,7 +128,7 @@ mod tests {
                 )),
             )),
         );
-        assert_eq!(third_odd(test_data), 3);
+        assert_eq!(third_odd(test_data), Ok(3));
     }
 
     #[test]
@@ -148,6 +146,6 @@ mod tests {
                 )),
             )),
         );
-        assert_eq!(third_odd(test_data), -1);
+        assert_eq!(third_odd(test_data), Ok(-1));
     }
 }
