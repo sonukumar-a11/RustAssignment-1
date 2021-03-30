@@ -1,51 +1,137 @@
 #[cfg(test)]
-use crate::check_coordinates::_Point;
+mod tests {
+    use crate::coordinate_check::check_coordinates::{check_coordinate, Coordinate, Position};
+    use crate::ipcheck::check_ipaddress::{check_ip_address, IpAddress};
 
-#[test]
-fn check_coordinate_axis0() {
-    let point: Vec<_Point> = vec![_Point(3, 4), _Point(-4, 3), _Point(-3, -4), _Point(3, -4)];
-    let output1 = point[0]._check_coordinate();
-    assert_eq!(output1, "Abscissa 3 , Ordinate 4 ,First_Quadrant");
+    #[test]
+    fn check_coordinate_for_first() {
+        let point_check = (2, 3);
+        assert_eq!(
+            check_coordinate(point_check),
+            Ok(Position::First(
+                Coordinate::Abscissa(2),
+                Coordinate::Ordinate(3),
+            ))
+        )
+    }
 
-    let output2 = point[1]._check_coordinate();
-    assert_eq!(output2, "Abscissa -4 , Ordinate 3 ,Second_Quadrant");
+    #[test]
+    fn check_coordinate_for_second() {
+        let point_check = (-2, 3);
+        assert_eq!(
+            check_coordinate(point_check),
+            Ok(Position::Second(
+                Coordinate::Abscissa(-2),
+                Coordinate::Ordinate(3),
+            ))
+        )
+    }
 
-    let output3 = point[2]._check_coordinate();
-    assert_eq!(output3, "Abscissa -3 , Ordinate -4 ,Third_Quadrant");
+    #[test]
+    fn check_coordinate_for_third() {
+        let point_check = (-2, -3);
+        assert_eq!(
+            check_coordinate(point_check),
+            Ok(Position::Third(
+                Coordinate::Abscissa(-2),
+                Coordinate::Ordinate(-3),
+            ))
+        )
+    }
 
-    let output4 = point[3]._check_coordinate();
-    assert_eq!(output4, "Abscissa 3 , Ordinate -4 ,Fourth_Quadrant");
-}
+    #[test]
+    fn check_coordinate_for_fourth() {
+        let point_check = (2, -3);
+        assert_eq!(
+            check_coordinate(point_check),
+            Ok(Position::Fourth(
+                Coordinate::Abscissa(2),
+                Coordinate::Ordinate(-3),
+            ))
+        )
+    }
 
-#[test]
-fn check_ip() {
-    use crate::check_ipaddress;
-    use crate::check_ipaddress::IpAddress;
-    let ip_address_input = vec![
-        (121, 0, 1, 0),
-        (132, 0, 1, 1),
-        (198, 0, 1, 1),
-        (245, 0, 1, 1),
-        (266, 0, 1, 1),
-    ];
-    let output_ip_address = check_ipaddress::_check_ip(ip_address_input[0]);
-    assert_eq!(output_ip_address, IpAddress::_ClassA("Class A".to_string()));
+    #[test]
+    fn check_coordinate_for_x_axis() {
+        let point_check = (-2, 0);
+        assert_eq!(
+            check_coordinate(point_check),
+            Ok(Position::XAxis(
+                Coordinate::Abscissa(-2),
+                Coordinate::Ordinate(0),
+            ))
+        )
+    }
 
-    let output_ip_address1 = check_ipaddress::_check_ip(ip_address_input[1]);
-    assert_eq!(
-        output_ip_address1,
-        IpAddress::_ClassB("Class B".to_string())
-    );
+    #[test]
+    fn check_coordinate_for_y_axis() {
+        let point_check = (0, 3);
+        assert_eq!(
+            check_coordinate(point_check),
+            Ok(Position::YAxis(
+                Coordinate::Abscissa(0),
+                Coordinate::Ordinate(3),
+            ))
+        )
+    }
 
-    let output_ip_address2 = check_ipaddress::_check_ip(ip_address_input[2]);
-    assert_eq!(
-        output_ip_address2,
-        IpAddress::_ClassC("Class C".to_string())
-    );
+    #[test]
+    fn check_coordinate_next() {
+        let point_check = (0, 0);
+        assert_eq!(
+            check_coordinate(point_check),
+            Ok(Position::Origin(
+                Coordinate::Abscissa(0),
+                Coordinate::Ordinate(0),
+            ))
+        );
+    }
 
-    let output_ip_address3 = check_ipaddress::_check_ip(ip_address_input[3]);
-    assert_eq!(
-        output_ip_address3,
-        IpAddress::_ClassD("Class D".to_string())
-    );
+    #[test]
+    fn check_ip_class_for_a() {
+        assert_eq!(
+            check_ip_address((102, 1, 3, 4)),
+            Ok(IpAddress::ClassA("102.1.3.4".to_string()))
+        );
+    }
+
+    #[test]
+    fn check_ip_class_for_b() {
+        assert_eq!(
+            check_ip_address((143, 143, 10, 10)),
+            Ok(IpAddress::ClassB("143.143.10.10".to_string()))
+        );
+    }
+
+    #[test]
+    fn check_ip_class_for_c() {
+        assert_eq!(
+            check_ip_address((220, 143, 3, 4)),
+            Ok(IpAddress::ClassC("220.143.3.4".to_string()))
+        );
+    }
+
+    #[test]
+    fn check_ip_class_for_d() {
+        assert_eq!(
+            check_ip_address((231, 1, 3, 4)),
+            Ok(IpAddress::ClassD("231.1.3.4".to_string()))
+        );
+    }
+
+    #[test]
+    fn check_ip_class_for_e() {
+        assert_eq!(
+            check_ip_address((246, 1, 3, 4)),
+            Ok(IpAddress::ClassE("246.1.3.4".to_string()))
+        );
+    }
+
+    #[test]
+    fn check_ip_class_for_invalid() {
+        assert_eq!(
+            check_ip_address((102, 26666, 2589, 6589)),
+            Err("Unwanted Input".to_owned())
+        );
+    }
 }
